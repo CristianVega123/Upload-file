@@ -18,7 +18,7 @@ function App() {
     if (ref_file.current?.files) {
      console.log(formDataFile.getAll("file")) 
     }
-    fetch(`${url_dev}/upload`, {
+    fetch(`${url_dev}/api/upload`, {
       method: "POST",
       body: formDataFile
     });
