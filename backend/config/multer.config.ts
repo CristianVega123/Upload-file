@@ -1,11 +1,20 @@
 import { diskStorage } from "multer";
 import { randomUUID } from "crypto";
-import { access } from "fs/promises";
+import { access, constants, mkdir } from "node:fs";
+import { path_dirname } from "../url";
 
 export const storage = diskStorage({
     destination(req, file, cb) {
-        
-        cb(null, 'data')
+        access(`${path_dirname}\\data`, constants.F_OK, (err) => {
+            if (err) {
+                mkdir(`${path_dirname}\\data`, {recursive: true}, (err) => {
+                    if(err) console.log(err)
+                })
+                console.log("no existe")
+            }
+            console.log("existe el archivo data")
+            cb(null, 'data')
+        })
     },
     filename: (req, file, cb) => {
         let { mimetype, originalname } = file;

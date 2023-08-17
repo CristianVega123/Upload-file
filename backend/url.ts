@@ -1,0 +1,1 @@
+export const path_dirname = __dirname;
