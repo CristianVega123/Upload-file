@@ -11,7 +11,7 @@ const upload = multer({
 
 router.post("/upload",upload.single("file") ,(req: Request, res: Response) => {
     console.log(req.file)
-    console.log(req.body)
+    console.log(req.body.idFile)
     res.send(200)
 })
 

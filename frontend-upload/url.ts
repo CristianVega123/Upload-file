@@ -1,1 +1,1 @@
-export const url_dev = "http://localhost:3120"
+export const url_dev_backend = "http://localhost:3045"

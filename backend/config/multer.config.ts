@@ -10,18 +10,15 @@ export const storage = diskStorage({
                 mkdir(`${path_dirname}\\data`, {recursive: true}, (err) => {
                     if(err) console.log(err)
                 })
-                console.log("no existe")
             }
-            console.log("existe el archivo data")
             cb(null, 'data')
         })
     },
     filename: (req, file, cb) => {
-        let { mimetype, originalname } = file;
+        let { mimetype } = file;
         let extension = mimetype.split("/")[1];
 
-        console.log(file)
-        cb(null, `${randomUUID()}.${extension}`)
+        cb(null, `image-${randomUUID()}.${extension}`)
     },
 });
 

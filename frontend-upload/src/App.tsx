@@ -1,5 +1,5 @@
 import { FormEvent, useRef } from "react";
-import { url_dev } from "../url";
+import { url_dev_backend } from "../url";
 
 function App() {
   const ref_file = useRef<HTMLInputElement | null>(null);
@@ -9,6 +9,7 @@ function App() {
   const file_event = () => {
     if (ref_file.current?.files) {
       formDataFile.append("file", ref_file.current.files[0]);
+      formDataFile.append("idFile", crypto.randomUUID())
       console.log(ref_file.current.files[0]);
     }
   };
@@ -18,10 +19,13 @@ function App() {
     if (ref_file.current?.files) {
      console.log(formDataFile.getAll("file")) 
     }
-    fetch(`${url_dev}/api/upload`, {
+    fetch(`${url_dev_backend}/api/upload`, {
       method: "POST",
       body: formDataFile
     });
+
+    formDataFile.delete("file")
+    formDataFile.delete("idFile")
   };
 
   return (
