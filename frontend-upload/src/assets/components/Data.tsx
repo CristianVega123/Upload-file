@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { url_dev_backend } from "../url";
+import { url_dev_backend } from "../../../url";
 import { useParams } from "react-router-dom";
 
 export default function Data() {
