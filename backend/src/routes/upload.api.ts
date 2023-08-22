@@ -1,19 +1,13 @@
 import { Router } from "express";
-import { Request, Response } from "express";
-import multer from "multer";
+import multer, {} from "multer";
 import { storage } from "../../config/multer.config";
+import { CreateDataUpload } from '../controllers/createDataUpload'
 
-const router = Router()
+const router = Router();
 const upload = multer({
-    // dest: "upload",
-    storage
-})
+  storage,
+});
 
-router.post("/upload",upload.single("file") ,(req: Request, res: Response) => {
-    console.log(req.file)
-    console.log(req.body.idFile)
-    res.send(200)
-})
-
+router.post("/upload", upload.single("file"), CreateDataUpload);
 
 export default router;

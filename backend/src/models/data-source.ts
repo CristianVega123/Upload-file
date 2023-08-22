@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { config } from "dotenv";
-import {Storage_Image} from './entity/storageImage.model'
+import { Storage } from './entity/Storage/Storage'
 
 config();
 
@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DATABASE_NAME as string,
   synchronize: true,
   logging: true,
-  entities: [Storage_Image],
+  entities: [Storage],
   subscribers: [],
   migrations: [],
 });

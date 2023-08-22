@@ -5,6 +5,7 @@ import cors from "cors";
 
 import Router from "./routes/upload.api";
 import Data from "./routes/uploadData.api";
+import AllData from "./routes/giveData.api";
 import { AppDataSource } from "./models/data-source";
 
 // import {storage} from '../config/multer.config'
@@ -22,6 +23,7 @@ app.use(Express.urlencoded({ extended: false }));
 // Routes
 app.use("/api", Router);
 app.use("/api", Data);
+app.use("/api", AllData)
 
 const PORT = process.env.PORT || 3120;
 
