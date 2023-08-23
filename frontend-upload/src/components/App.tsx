@@ -4,7 +4,6 @@ import {
   Button,
   Accordion,
   AccordionItem,
-  ScrollShadow,
   Link,
   Table,
   TableHeader,
