@@ -2,7 +2,17 @@ import { useRef, useState, useEffect } from "react";
 import { url, url_dev_backend } from "../../url";
 import {
   Button,
+  Accordion,
+  AccordionItem,
+  ScrollShadow,
   Link,
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  getKeyValue,
 } from "@nextui-org/react";
 import Layout from "../Layout/Layout";
 
@@ -21,6 +31,24 @@ type SetOfIDataAll = {
   data: IDataAll[];
 };
 
+const columns = [
+  {
+    id: 0,
+    label: "ID de la imagen",
+  },
+  {
+    id: 1,
+    label: "Nombre Orignal",
+  },
+  {
+    id: 2,
+    label: "Nombre Guardado",
+  },
+  {
+    id: 3,
+    label: "URL del recurso",
+  },
+];
 
 export default function App() {
   const ref_file = useRef<HTMLInputElement>(null);
@@ -41,7 +69,6 @@ export default function App() {
     return () => {};
   }, []);
 
-  console.log(dataAll);
   const file_event = () => {
     if (ref_file.current?.files) {
       if (!formDataFile) {
@@ -53,7 +80,7 @@ export default function App() {
     }
   };
 
-  const upload_files = () => {
+  const upload_files = async () => {
     const dataFormBody = new FormData();
 
     if (formDataFile) {
@@ -71,8 +98,11 @@ export default function App() {
       ref_AnchorData.current.textContent = "Ver el enlace";
       ref_file.current.value = "";
     }
-    console.log(ref_AnchorData.current);
     setFormDataFile(null);
+
+    fetch(`${url_dev_backend}/api/all`)
+      .then((json) => json.json())
+      .then((res) => console.log(res));
   };
 
   return (
@@ -108,6 +138,59 @@ export default function App() {
         <Link ref={ref_AnchorData} isExternal></Link>
       </div>
 
+      <Accordion
+        itemClasses={{
+          title: "font-bold",
+          base: "bg-black ",
+          
+        }}
+        variant="splitted"
+      >
+        <AccordionItem
+          className="text-[#96A5C7]"
+          key={1}
+          aria-label="datos"
+          title="Url de las imagenes"
+        >
+          <Table
+            aria-label="Example table with dynamic content"
+            classNames={{ tbody: "bg-black", th: "bg-black", table: "bg-black" }}
+          >
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn key={column.id}>{column.label}</TableColumn>
+              )}
+            </TableHeader>
+            <TableBody items={dataAll?.data}>
+              {(item) => (
+                <TableRow key={item.id_storage}>
+                  {(columnkey) => {
+                    let keyInterfaceData: { [key: string]: any };
+                    if (dataAll) {
+                      keyInterfaceData = Object.keys(dataAll.data[0]);
+
+                      if (columnkey == 3) {
+                        return (
+                          <TableCell>
+                            {`${url}/api/data/` + item.id_storage}
+                          </TableCell>
+                        );
+                      }
+
+                      return (
+                        <TableCell>
+                          {getKeyValue(item, keyInterfaceData[columnkey])}
+                        </TableCell>
+                      );
+                    }
+                    return <TableCell>{[]}</TableCell>;
+                  }}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </AccordionItem>
+      </Accordion>
     </Layout>
   );
 }
