@@ -1,8 +1,7 @@
 import { DataSource } from "typeorm";
-import { config } from "dotenv";
-import { Storage } from './entity/Storage/Storage'
+import { Storage_Local } from './entity/Storage/Storage'
+import { Storage_Production } from './entity/Storage_production/StorageProduc'
 
-config();
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -12,7 +11,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DATABASE_NAME as string,
   synchronize: true,
   logging: true,
-  entities: [Storage],
+  entities: [Storage_Local, Storage_Production],
   subscribers: [],
   migrations: [],
 });

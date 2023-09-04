@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, Column } from "typeorm";
 
 @Entity()
-export class Storage {
+export class Storage_Local {
   @PrimaryColumn({type: "varchar", length: 120})
   id_storage !: string
 

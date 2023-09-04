@@ -2,16 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { url, url_dev_backend } from "../../url";
 import {
   Button,
-  Accordion,
-  AccordionItem,
   Link,
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  getKeyValue,
 } from "@nextui-org/react";
 import Layout from "../Layout/Layout";
 
@@ -137,7 +128,7 @@ export default function App() {
         <Link ref={ref_AnchorData} isExternal></Link>
       </div>
 
-      <Accordion
+      {/* <Accordion
         itemClasses={{
           title: "font-bold",
           base: "bg-black ",
@@ -189,7 +180,7 @@ export default function App() {
             </TableBody>
           </Table>
         </AccordionItem>
-      </Accordion>
+      </Accordion> */}
     </Layout>
   );
 }

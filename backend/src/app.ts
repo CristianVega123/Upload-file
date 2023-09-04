@@ -1,17 +1,18 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import "reflect-metadata";
-import { config } from "dotenv";
 import Express from "express";
 import cors from "cors";
+import { AppDataSource } from "./models/data-source";
 
+
+// Import de las rutas
 import Router from "./routes/upload.api";
 import Data from "./routes/uploadData.api";
 import AllData from "./routes/giveData.api";
-import { AppDataSource } from "./models/data-source";
-
-// import {storage} from '../config/multer.config'
+import DataExample from './routes/data.api'
 
 const app = Express();
-config();
 app.use(
   cors({
     origin: "*",
@@ -24,6 +25,7 @@ app.use(Express.urlencoded({ extended: false }));
 app.use("/api", Router);
 app.use("/api", Data);
 app.use("/api", AllData)
+app.use("/example", DataExample)
 
 const PORT = process.env.PORT || 3120;
 
