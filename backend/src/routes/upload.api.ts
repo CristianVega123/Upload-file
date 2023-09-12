@@ -4,19 +4,20 @@ import { storage } from "../../config/multer.config";
 import { CreateDataUpload } from '../controllers/createDataUpload'
 
 const router = Router();
-let upload;
+let upload ;
+
 if ((process.env.NODE_MODE as string).toLowerCase() === "production") {
   upload = multer({
     storage: memoryStorage()
   })
-  
+ 
+
 } else {
   upload = multer({
    storage,
  });
-  
 }
 
-router.post("/upload", upload.single("file"), CreateDataUpload);
+router.post("/upload", upload.array("files_save", 10), CreateDataUpload);
 
 export default router;

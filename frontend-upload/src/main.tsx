@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import ReactDOM from "react-dom/client";
-import App from "./components/App.tsx";
+import App from "./App.tsx";
 import Data from "./components/Data.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";

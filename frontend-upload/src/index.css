@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .drag-over{
+        background-color: #dfe3c2;
+    }
+    .drag-over-color {
+        color: #1c1f29;
+    }
+}
