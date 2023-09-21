@@ -1,5 +1,5 @@
 import { useState, useRef} from 'react'
-import { url, url_dev_backend } from "../../url";
+import { url, url_dev_backend } from "../url";
 import {
   Button,
   Link,

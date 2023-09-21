@@ -35,4 +35,5 @@ AppDataSource.initialize().then(() => {
 
 app.listen(PORT, () => {
   console.log("El servidor esta encendido en el puesto " + PORT);
+  console.log("Trabajando en el modo " + process.env.NODE_MODE)
 });

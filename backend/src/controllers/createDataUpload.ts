@@ -20,6 +20,7 @@ async function CreateDataUpload(req: Request, res: Response) {
 
         if (isArray(ArrayFiles)) {
           for (const file of ArrayFiles) {
+            const { originalname } = file
             const response: UploadApiResponse | undefined = await new Promise(
               (resolve, reject) => {
                 cloudinary.uploader
@@ -34,13 +35,18 @@ async function CreateDataUpload(req: Request, res: Response) {
               }
               );
               if (response) {
-                await StorageProductRepository.insert({
+                console.log(response);
+                
+                const dataSave = await StorageProductRepository.insert({
                   assets_id: response.asset_id,
                   format: response.format,
                   url: response.url,
                   secure_url: response.secure_url,
-                  name_file_current: response.original_filename,
+                  name_file_current: originalname,
                 });
+                
+
+                res.json(dataSave.identifiers[0])
               }
             
           }
@@ -63,7 +69,7 @@ async function CreateDataUpload(req: Request, res: Response) {
       }
   } catch (error) {}
 
-  res.sendStatus(200);
+  // res.sendStatus(200);
 }
 
 export { CreateDataUpload };

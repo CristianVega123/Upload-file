@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Storage_Production {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn({type: "varchar", length: 120})
     assets_id !: string 
 
     @Column({length: 20})

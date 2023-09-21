@@ -1,12 +1,32 @@
 import { Request, Response } from "express";
 import { userRepository } from '../models/entity/Storage/Storage.repository'
+import { StorageProductRepository } from '../models/entity/Storage_production/StorageProduct.respository'
+
 import { codifyBase64 } from "../utils/utlis.codify";
 
 
 
 export async function sentData(req: Request, res: Response) {
 
-    if ((process.env.NODE_MODE as string).toLowerCase() === "production") {
+    if ((process.env.NODE_MODE as string).toLowerCase() === "production") { 
+        let { id } = req.params;
+
+        const data = await StorageProductRepository.findOne({
+            where: {
+                assets_id: id
+            }
+        })
+
+        if (data) {
+            res.json({
+                url: data.url
+            })
+        } else {
+            res.sendStatus(404)
+        }
+
+        console.log(data?.url)
+        
         
     } else {
         try {

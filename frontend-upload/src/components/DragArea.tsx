@@ -1,68 +1,25 @@
 import React, { useRef, useState } from "react";
 import PreviewDiv from "./PreviewDiv";
-import { url_dev_backend } from '../../url'
 
 function DragArea() {
-  // const ref_$file = useRef<HTMLInputElement>(null)
   const $label = useRef<HTMLLabelElement>(null);
   const $svg = useRef<SVGSVGElement>(null);
   const $h2 = useRef<HTMLHeadingElement>(null);
   const $p = useRef<HTMLParagraphElement>(null);
 
-  const [file, setFile] = useState<FileList[] | null>(null);
-
-  // function processFile(files: FileList[]) {
-  //   setFile(files);
-  //   setTimeout(() => {
-  //     setFile(null);
-  //   }, 2000);
-  // }
-
-  // function showFiles(files: FileList[]) {
-  //   if (files.length === 1) {
-  //     processFile(files);
-  //   } else {
-  //     processFile(files);
-  //   }
-  // }
+  const [fileArray, setFileArray] = useState<File[] | null>(null);
 
 
 
-  const sentBufferData = (arrayFiles: File[], length: number ) => {
-    const formData = new FormData();
-
-    for (let index = 0; index < length; index++) {
-      const file = arrayFiles[index]
-      console.log(file, length)
-      
-      formData.append(`files_save`, file) 
-      console.log(formData.get("file-0"))
-    }
-
-    fetch(`${url_dev_backend}/api/upload`, {
-      method: "POST", 
-      body: formData
-    })
-  }  
-
-  // function uploadFiles(files: FileList) {
-
-  //   if (files.length === 1) {
-  //     sentBufferData(Array.from(files), files.length)
-      
-  //   } else {
-  //     console.log("bastantes archivos");
-  //   }
-  // }
 
   const sent_fileorFiles = (event: React.ChangeEvent) => {
     const $inputFile = event.target as HTMLInputElement;
     event.preventDefault();
 
-    // if ($inputFile.files) {
-    //   const contentFiles = $inputFile.files
-    //   sentBufferData(Array.from(contentFiles), contentFiles.length) 
-    // }
+    if ($inputFile.files) {
+      const contentFiles = $inputFile.files
+      setFileArray(Array.from(contentFiles))
+    }
   };
 
   const sent_filesDrop = (event: React.DragEvent) => {
@@ -73,10 +30,10 @@ function DragArea() {
       $p.current?.classList.remove("font-bold");
     }
 
-    // if (event.dataTransfer.files) {
-    //   const contentFiles =event.dataTransfer.files 
-    //   sentBufferData(Array.from(contentFiles), contentFiles.length)        
-    // }
+    if (event.dataTransfer.files) {
+      const contentFiles =event.dataTransfer.files 
+      setFileArray(Array.from(contentFiles))
+    }
   };
 
   return (
@@ -144,7 +101,7 @@ function DragArea() {
           />
         </label>
       </div>
-      {file && <PreviewDiv />}
+      {fileArray && <PreviewDiv files={fileArray} />}
     </>
   );
 }
