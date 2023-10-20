@@ -7,10 +7,25 @@ Para la construcción de componentes use **NextUI** [🚩](https://nextui.org/),
 
 #### Tecnologías usadas en el Backend:
 Use Nodejs con su framework **Express** [🚩](https://expressjs.com/), además use Typescript para la realización implementado ts-node.
-**Multer** para la carga de imágenes, y **TypeORM** [🚩](https://typeorm.io/)
+**Multer** para la carga de imágenes, y **TypeORM** [🚩](https://typeorm.io/). Además usamos un servicio cloud llamado Cloudinary, servicio para guardar imagenes.
+
+
+
 
 
 ## Uso
+Primero se tiene que crear en la carpeta **backend** un archivo .env
+```.env
+PORT= 3000 -> El puerto que usted necesite.
+DATABASE_USER=user -> El usuario de la base de datos
+DATABASE_PASSWORD=**** -> La contraseña de la base de datos
+DATABASE_NAME=storage-image -> Nombre de la base de datos
+NODE_MODE=Production
+CLOUD_NAME=namecloud -> Nombre de cloud 
+API_KEY_CLOUD=keycloud -> Llave de cloud
+API_SECRET_CLOUD=secret -> Api secreto del cloud
+```
+
 Para poder correr el programa debes abrir dos consolas (cada una correrá sus servidores correspondientes).
 Cuando en ambas se encuentren en el archivo (File Upload) deben hacer esto: 
 ```bash
